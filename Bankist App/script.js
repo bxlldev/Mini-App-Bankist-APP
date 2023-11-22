@@ -85,7 +85,7 @@ const displayMovements = function (movements, sort = false) {
      <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-     <div class="movements__value">${mov}€</div>
+     <div class="movements__value">${mov.toFixed(2)}€</div>
     </div>
     `;
     // forEach Method will be adding in HTML, at the top of element (afterbegin), if using (beforeend) it will adding in HTML, at the bottom of element
@@ -96,7 +96,7 @@ const displayMovements = function (movements, sort = false) {
 //------Calculate Display Balance Func------
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance} €`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)} €`;
 };
 
 //------Calculate Display Summary Func------
@@ -105,13 +105,13 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   // Outcome => total withdrawal
   const outcomes = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`;
 
   // Interest => total deposit * 1.2%
   const interest = acc.movements
@@ -122,7 +122,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1; // Bank rules: Interest totally included only 1 at lease.
     })
     .reduce((acc, int) => acc + int);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 //------create .username foreach owner Func------
@@ -207,7 +207,8 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  // Using Math.floor to rounding down all decimal path when loan the money from the bank
+  const amount = Math.floor(inputLoanAmount.value);
   // Any deposit > 10% of request
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
