@@ -18,7 +18,7 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   color: #444;
-  background-color: #f3f3f3;
+  background-color: #e3e8eb;
   height: 100vh;
   padding: 2rem;
 }
@@ -294,4 +294,26 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+
+/* created by */
+.created-by {
+  margin-bottom: 1rem;
+  padding-top: 10rem;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 100;
+  color: #cbbaba;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.balldev-pic {
+  margin: 1rem;
+  padding: 1rem;
+  width: 40px;
+  position: fixed;
+  bottom: 14px;
+  right: 215px;
 }
